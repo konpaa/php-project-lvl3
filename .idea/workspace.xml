@@ -2,17 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9eed8754-8ea1-4a57-9c11-22d8b37c4752" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UrlsCheckController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UrlsCheckController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UrlsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UrlsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/check/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/check/create.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/domains/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/domains/create.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/domains/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/domains/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/domains/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/domains/show.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/welcome.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/welcome.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Feature/UserTest.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -173,7 +163,7 @@
       <workItem from="1614253543699" duration="65000" />
       <workItem from="1614326902263" duration="7663000" />
       <workItem from="1614335294441" duration="227000" />
-      <workItem from="1614335572619" duration="12448000" />
+      <workItem from="1614335572619" duration="13896000" />
     </task>
     <servers />
   </component>
