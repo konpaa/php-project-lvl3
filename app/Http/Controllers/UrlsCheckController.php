@@ -25,7 +25,7 @@ class UrlsCheckController extends Controller
             $descriptionElement = $document->first('meta[name=description]');
             $keywords = optional($keywordsElement)->getAttribute('content');
             $description = optional($descriptionElement)->getAttribute('content');
-            DB::table('domain_checks')->insert(
+            DB::table('domains_checks')->insert(
                 [
                     'domain_id' => $id,
                     'status_code' => $status,

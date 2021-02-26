@@ -19,23 +19,23 @@ class UrlsController extends Controller
         $domains = DB::table('domains')
             ->select('id', 'name')
             ->paginate();
-        $lastChecks = DB::table('domain_checks')
-            ->select('domain_id', 'status_code', DB::raw('MAX(domain_checks.updated_at) as last_check'))
+        $lastChecks = DB::table('domains_checks')
+            ->select('domain_id', 'status_code', DB::raw('MAX(domains_checks.updated_at) as last_check'))
             ->groupBy('domain_id', 'status_code')
             ->get();
         $lastDomainChecks = $lastChecks->keyBy('domain_id');
-        return view('domain.index', compact('domains', 'lastDomainChecks'));
+        return view('domains.index', compact('domains', 'lastDomainChecks'));
     }
 
     public function show($id)
     {
         $domain = DB::table('domains')->find($id);
 
-        $domain_checks = DB::table('domain_checks')
+        $domain_checks = DB::table('domains_checks')
             ->where('domain_id', '=', $id)
             ->paginate(10);
 
-        return view('domain.show', compact('domain', 'domain_checks'));
+        return view('domains.show', compact('domain', 'domain_checks'));
     }
 
     public function store(Request $request)
