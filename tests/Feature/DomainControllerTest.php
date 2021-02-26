@@ -31,7 +31,7 @@ class DomainControllerTest extends TestCase
 
     public function testShow()
     {
-        $id = $this->faker->randomDigitNot(0);
+        $id = $this->faker->randomDigitNotNull;
         $responce = $this->get(route('domains.show', ['id' => $id]));
         $responce->assertOk();
 
