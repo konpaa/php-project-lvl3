@@ -39,10 +39,22 @@ class UrlsCheckController extends Controller
         } catch (HttpException $err) {
             flash($err->getMessage())->error();
         } catch (Throwable $e) {
-            abort(404);
+            DB::table('domains_checks')->insert(
+                [
+                    'domain_id' => $id,
+                    'status_code' => '404',
+                    'h1' => null,
+                    'keywords' => null,
+                    'description' => null,
+                    'created_at' => Carbon::now()->toDateTimeString(),
+                    'updated_at' => Carbon::now()->toDateTimeString()
+                ]
+            );
+            flash('Site broked')->warning();
+            return redirect()->route('domains.show', ['id'=>$id]);
+//            abort(404);
         }
         flash('Site has been cheked')->success();
-        return redirect()
-            ->route('domains.show', ['id' => $id]);
+        return redirect()->route('domains.show', ['id' => $id]);
     }
 }
