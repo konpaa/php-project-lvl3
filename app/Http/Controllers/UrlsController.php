@@ -53,7 +53,7 @@ class UrlsController extends Controller
                 ->route('domains.show', ['id' => $id]);
         } else {
             $validatedData = Validator::make(['name' => $normalizedUri], [
-                'name' => 'required|max:255',
+                'name' => 'required|max:255|url'
             ])->validate();
 
             DB::table('domains')->insert(
