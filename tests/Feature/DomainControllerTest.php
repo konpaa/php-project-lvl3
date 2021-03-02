@@ -7,7 +7,6 @@ use Tests\TestCase;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
-
 class DomainControllerTest extends TestCase
 {
     protected function setUp(): void
