@@ -2,8 +2,37 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9eed8754-8ea1-4a57-9c11-22d8b37c4752" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/Models/UrlChecks.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/migrations/2021_03_02_201135_create_url_checks_table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/migrations/2021_03_02_210647_new_type_add_urls_table=textursl.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/auth/login.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/auth/passwords/confirm.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/auth/passwords/email.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/auth/passwords/reset.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/auth/register.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/auth/verify.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UrlsCheckController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UrlsCheckController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UrlsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UrlsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/session.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/session.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2021_02_26_124819_create_domains_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_02_26_124819_create_domains_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2021_02_26_124943_create_domains_checks_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_02_26_124943_create_domains_checks_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/check/create.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/domains/create.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/domains/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/urls/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/domains/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/urls/show.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/welcome.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/main.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/Feature/CheckControllerTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Feature/PageControllerTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/Feature/DomainControllerTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Feature/DomainControllerTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/Feature/UserTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Feature/UrlChecksControllerTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/Feature/fixtures/test.html" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Feature/fixtures/test.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -167,6 +196,9 @@
       <workItem from="1614335572619" duration="20942000" />
       <workItem from="1614370801295" duration="686000" />
       <workItem from="1614584486525" duration="4297000" />
+      <workItem from="1614589881892" duration="130000" />
+      <workItem from="1614590305328" duration="1000" />
+      <workItem from="1614681464131" duration="6497000" />
     </task>
     <servers />
   </component>

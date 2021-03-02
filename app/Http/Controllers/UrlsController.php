@@ -3,74 +3,50 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
-use DiDom\Document;
-use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Http\Request;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Validator;
-use URL\Normalizer as URLNormalizer;
 
 class UrlsController extends Controller
 {
-    public function index()
+    public function index(): object
     {
-        $domains = DB::table('domains')
-            ->select('id', 'name')
-            ->paginate();
-        $lastChecks = DB::table('domains_checks')
-            ->select('domain_id', 'status_code', DB::raw('MAX(domains_checks.updated_at) as last_check'))
-            ->groupBy('domain_id', 'status_code')
-            ->get();
-        $lastDomainChecks = $lastChecks->keyBy('domain_id');
-        return view('domains.index', compact('domains', 'lastDomainChecks'));
+        $urls = DB::table('urls')->orderBy('id', 'asc')->get();
+        $checks = DB::table('url_checks')->orderBy('url_id', 'asc')->orderBy('created_at', 'desc')->distinct('url_id')->get();
+        $lastCheck = $checks->keyBy('url_id');
+        return view('urls.index', compact('urls', 'lastCheck'));
     }
-
-    public function show($id)
+    public function show(int $id): object
     {
-        $domain = DB::table('domains')->find($id);
-
-        $domain_checks = DB::table('domains_checks')
-            ->where('domain_id', '=', $id)
-            ->paginate(10);
-
-        return view('domains.show', compact('domain', 'domain_checks'));
+        $url = DB::table('urls')->find($id);
+        $cheks = DB::table('url_checks')->where('url_id', '=', $id)->orderBy('updated_at', 'desc')->get();
+        return view('urls.show', compact('url', 'cheks'));
     }
-
-    public function store(Request $request)
+    public function store(Request $request): object
     {
-        $urlNormalizer = new URLNormalizer($request->name);
-        $normalizedUri = $urlNormalizer->normalize();
-        $domain = DB::table('domains')
-            ->where('name', $normalizedUri)
-            ->first();
-
-        if ($domain) {
-            $id = $domain->id;
-            flash('This url already exists')->warning();
-            return redirect()
-                ->route('domains.show', ['id' => $id]);
-        } else {
-            $validatedData = Validator::make(['name' => $normalizedUri], [
-                'name' => 'required|max:255|url'
-            ])->validate();
-
-            DB::table('domains')->insert(
-                [
-                    'name' => $validatedData['name'],
-                    'created_at' => Carbon::now()->toDateTimeString(),
-                    'updated_at' => Carbon::now()->toDateTimeString()
-                ]
-            );
-            $domain = DB::table('domains')
-                ->where('name', $normalizedUri)
-                ->first();
-            $id = $domain->id;
-            flash('Url has been added')->success();
-            return redirect()
-                ->route('domains.show', ['id' => $id]);
+        $formData = $request->input('url');
+        $validator = Validator::make($formData, [
+            'name' => 'required|url|max:255'
+        ]);
+        if ($validator->fails()) {
+            flash('Не корректный адрес сайта!')->error();
+            return redirect()->route('main');
         }
-    }
 
+        $urlData = parse_url($formData['name']);
+        $host = "{$urlData['scheme']}://{$urlData['host']}";
+
+        $url = DB::table('urls')->where('name', $host)->first();
+        if (! is_null($url)) {
+            flash("Такой сайт \"{$url->name}\" уже существует!")->warning();
+            $id = $url->id;
+        } else {
+            $id = DB::table('urls')->insertGetId([
+                'name' => $host,
+                'created_at' => Carbon::now()
+            ]);
+            flash('Сайт успешно добавлен!')->success();
+        }
+        return redirect()->route('urls.show', $id);
+    }
 }

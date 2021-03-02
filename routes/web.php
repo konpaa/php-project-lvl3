@@ -2,8 +2,8 @@
 
 use App\Http\Controllers\UrlsCheckController;
 use Illuminate\Support\Facades\Route;
-
 use App\Http\Controllers\UrlsController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,22 +16,6 @@ use App\Http\Controllers\UrlsController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/domains', [UrlsController::class,'index'])
-    ->name('domains.index');
-
-Route::post('/domains', [UrlsController::class,'store'])
-    ->name('domains.store');
-
-Route::get('/domains/{id}', [UrlsController::class,'show'])
-    ->name('domains.show');
-
-Route::post('/domains/{id}/checks', [UrlsCheckController::class,'store'])
-    ->name('domains.checks.store');
-
-
-
-
+Route::get('/', [HomeController::class, 'main'])->name('main');
+Route::resource('urls', UrlsController::class);
+Route::resource('urls.checks', UrlsCheckController::class);

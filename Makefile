@@ -9,6 +9,15 @@ setup:
 	php artisan migrate
 	npm install
 
+watch:
+	npm run watch
+
+migrate:
+	php artisan migrate
+
+console:
+	php artisan tinker
+
 log:
 	tail -f storage/logs/laravel.log
 
@@ -23,3 +32,6 @@ lint:
 
 lint-fix:
 	composer phpcbf
+
+test-coverage:
+	composer exec --verbose phpunit tests -- --coverage-clover build/logs/clover.xml

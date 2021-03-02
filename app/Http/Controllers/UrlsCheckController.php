@@ -4,57 +4,40 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use DiDom\Document;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
-use Symfony\Component\HttpKernel\Exception\HttpException;
-use Throwable;
+use Illuminate\Http\Client\RequestException;
+use Illuminate\Http\Client\ConnectionException;
 
 class UrlsCheckController extends Controller
 {
-    public function store($id)
+    public function store(int $id): object
     {
-        $domain = DB::table('domains')->find($id);
+        $url = DB::table('urls')->find($id);
+        abort_unless($url, 404);
         try {
-            $data = Http::get($domain->name);
-            $body = $data->body();
-            $status = $data->status();
-            $document = new Document($body);
-            $h1 = $document->has('h1') ? $document->first('h1')->text() : null;
-            $keywordsElement = $document->first('meta[name=keywords]');
-            $descriptionElement = $document->first('meta[name=description]');
-            $keywords = optional($keywordsElement)->getAttribute('content');
-            $description = optional($descriptionElement)->getAttribute('content');
-            DB::table('domains_checks')->insert(
-                [
-                    'domain_id' => $id,
-                    'status_code' => $status,
-                    'h1' => $h1,
-                    'keywords' => $keywords,
-                    'description' => $description,
-                    'created_at' => Carbon::now()->toDateTimeString(),
-                    'updated_at' => Carbon::now()->toDateTimeString()
-                ]
+            $response = Http::get($url->name);
+            $document = new Document($response->body());
+            $h1 = optional($document->first('h1'))->text();
+            $keywords = optional($document->first('meta[name=keywords]'))->getAttribute('content');
+            $description = optional($document->first('meta[name=description]'))->getAttribute('content');
+            DB::table('url_checks')->insert([
+                'url_id' => $id,
+                'status_code' => $response->status(),
+                'h1' => $h1,
+                'keywords' => $keywords,
+                'description' => $description,
+                'created_at' => $url->created_at,
+                'updated_at' => Carbon::now()
+            ]);
+            DB::table('urls')->where('id', $id)->update(
+                ['updated_at' => Carbon::now()]
             );
-        } catch (HttpException $err) {
-            flash($err->getMessage())->error();
-        } catch (Throwable $e) {
-            DB::table('domains_checks')->insert(
-                [
-                    'domain_id' => $id,
-                    'status_code' => '404',
-                    'h1' => null,
-                    'keywords' => null,
-                    'description' => null,
-                    'created_at' => Carbon::now()->toDateTimeString(),
-                    'updated_at' => Carbon::now()->toDateTimeString()
-                ]
-            );
-            flash('Site broked')->warning();
-            return redirect()->route('domains.show', ['id'=>$id]);
-//            abort(404);
+            flash('Сайт проанализирован!')->warning();
+            return redirect()->route('urls.show', $id);
+        } catch (RequestException | ConnectionException $e) {
+            flash("Error: {$e->getMessage()}")->error();
         }
-        flash('Site has been cheked')->success();
-        return redirect()->route('domains.show', ['id' => $id]);
+        return redirect()->route('urls.show', $id);
     }
 }

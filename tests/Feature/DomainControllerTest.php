@@ -3,50 +3,42 @@
 namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Http;
 use Tests\TestCase;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 
 class DomainControllerTest extends TestCase
 {
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
-    protected $faker;
-
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
-        $this->faker = \Faker\Factory::create();
-        $this->seed();
+        DB::table('urls')->insert([
+            ['name' => "https://test.ru", 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()]
+        ]);
     }
-
-    public function testIndex()
+    public function testIndex(): void
     {
-        $responce = $this->get(route('domains.index'));
-        $responce->assertOk();
+        $response = $this->get(route('urls.index'));
+        $response->assertOk();
     }
-
-    public function testShow()
+    public function testShow(): void
     {
-        $id = $this->faker->randomDigitNotNull;
-        $responce = $this->get(route('domains.show', ['id' => $id]));
-        $responce->assertOk();
-
-        $this->assertDatabaseHas('domains', ['id' => $id]);
+        $response = $this->get(route('urls.show', 1));
+        $response->assertOk();
     }
-
-    public function testStore()
+    public function testStore(): void
     {
-        $data = "https://www." . $this->faker->domainName;
-        $response = $this->post(route('domains.store'), ['name' => $data]);
+        $data = ['name' => "https://test.ru"];
+        $response = $this->post(route('urls.store'), ['url' => $data]);
         $response->assertSessionHasNoErrors();
         $response->assertRedirect();
+        $this->assertDatabaseHas('urls', $data);
 
-        $urlNormalizer = new \URL\Normalizer($data);
-        $normalizedData = $urlNormalizer->normalize();
-        $this->assertDatabaseHas('domains', ['name' => $normalizedData]);
+        $data = ['name' => ""];
+        $response = $this->post(route('urls.store'), ['url' => $data]);
+        $response->assertSessionHasNoErrors();
+        $response->assertRedirect();
+        $this->assertDatabaseMissing('urls', $data);
     }
 }
