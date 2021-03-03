@@ -2,19 +2,17 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 
-class UrlChecksControllerTest extends TestCase
+class UrlsCheckControllerTest extends TestCase
 {
     public function testStore(): void
     {
         $data = [
-            'id' => 999999,
+            'id' => 70,
             'name' => 'https://test.ru',
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()

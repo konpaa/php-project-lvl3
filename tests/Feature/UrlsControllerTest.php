@@ -2,12 +2,11 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
-class DomainControllerTest extends TestCase
+class UrlsControllerTest extends TestCase
 {
     protected function setUp(): void
     {
